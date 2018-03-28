@@ -1,0 +1,27 @@
+{
+    "name": "enolaphp/afip-soap",
+    "description": "Libreria para los servicios SOAP de Afip.",
+    "keywords": ["libreria", "enolaphp", "AFIP", "SOAP"],
+    "license": "MIT",
+    "version": "1.0",
+    "support": {
+        "issues": "https://github.com/edunola13/afip-soap/issues",
+        "source": "https://github.com/edunola13/afip-soap"
+    },
+    "authors": [
+        {
+            "name": "Eduardo Sebastian Nola",
+            "email": "edunola13@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0"
+    },
+    "require-dev": {        
+    },
+    "autoload": {
+        "psr-4": {
+            "Enola\\Afip\\": "src/"
+        }
+    }
+}
