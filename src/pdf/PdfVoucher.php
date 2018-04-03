@@ -178,8 +178,9 @@ class PdfVoucher extends \Spipu\Html2Pdf\Html2Pdf{
         $this->html .= "<th class='right-text' style='width=10%;'>" . $this->lang("Cantidad") . "</th>";
         $this->html .= "<th style='width=10%;'>" . $this->lang("U. Medida") . "</th>";
         $this->html .= "<th class='right-text' style='width=10%;'>" . $this->lang("Precio unit.") . "</th>";
-        $this->html .= "<th class='right-text' style='width=8%;'>" . $this->lang("% Bonif") . "</th>";
-        $this->html .= "<th class='right-text' style='width=10%;'>" . $this->lang("Imp. Bonif.") . "</th>";
+//        $this->html .= "<th class='right-text' style='width=8%;'>" . $this->lang("% Bonif") . "</th>";
+//        $this->html .= "<th class='right-text' style='width=10%;'>" . $this->lang("Imp. Bonif.") . "</th>";
+        $this->html .= "<th class='right-text' style='width=18%;'>" . $this->lang("Variacion") . "</th>";
         $this->html .= "<th class='right-text' style='width=6%;'>" . $this->lang("IVA") . "</th>";
         $this->html .= "<th class='right-text' style='width=10%;'>" . $this->lang("Subtotal") . "</th>";
         $this->html .= "</tr>";
@@ -194,9 +195,10 @@ class PdfVoucher extends \Spipu\Html2Pdf\Html2Pdf{
             $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["cantidad"], 3) . "</td>";
             $this->html .= "<td style='width=10%;'>" . $item["unidadMedida"] . "</td>";
             $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["precioUnitario"], 2) . "</td>";
-            $this->html .= "<td class='right-text' style='width=8%;'>" . number_format($item["porcBonif"], 2) . "</td>";
-            $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["impBonif"], 2) . "</td>";
-            $this->html .= "<td class='right-text' style='width=6%;'>" . number_format($item["Alic"], 0) . "%</td>";
+            /*$this->html .= "<td class='right-text' style='width=8%;'>" . number_format($item["porcBonif"], 2) . "</td>";
+            $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["impBonif"], 2) . "</td>";*/
+            $this->html .= "<td class='right-text' style='width=18%;'>" . number_format($item["variacion"], 2) . "</td>";
+            $this->html .= "<td class='right-text' style='width=6%;'>" . number_format($item["Alic"], 2) . "%</td>";
             $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["importeItem"], 2) . "</td>";
             $this->html .= "</tr>";
         }
@@ -214,8 +216,9 @@ class PdfVoucher extends \Spipu\Html2Pdf\Html2Pdf{
         $this->html .= "<th class='right-text' style='width=10%;'>" . $this->lang("Cantidad") . "</th>";
         $this->html .= "<th style='width=10%;'>" . $this->lang("U. Medida") . "</th>";
         $this->html .= "<th class='right-text' style='width=10%;'>" . $this->lang("Precio unit.") . "</th>";
-        $this->html .= "<th class='right-text' style='width=10%;'>" . $this->lang("% Bonif") . "</th>";
-        $this->html .= "<th class='right-text' style='width=10%;'>" . $this->lang("Imp. Bonif.") . "</th>";
+//        $this->html .= "<th class='right-text' style='width=10%;'>" . $this->lang("% Bonif") . "</th>";
+//        $this->html .= "<th class='right-text' style='width=10%;'>" . $this->lang("Imp. Bonif.") . "</th>";
+        $this->html .= "<th class='right-text' style='width=20%;'>" . $this->lang("Variacion") . "</th>";
         $this->html .= "<th class='right-text' style='width=10%;'>" . $this->lang("Subtotal") . "</th>";
         $this->html .= "</tr>";
         foreach ($this->extraData["items"] as $item) {
@@ -229,8 +232,9 @@ class PdfVoucher extends \Spipu\Html2Pdf\Html2Pdf{
             $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["cantidad"], 3) . "</td>";
             $this->html .= "<td style='width=10%;'>" . $this->lang($item["unidadMedida"]) . "</td>";
             $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["precioUnitario"], 2) . "</td>";
-            $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["porcBonif"], 2) . "</td>";
-            $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["impBonif"], 2) . "</td>";
+            /*$this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["porcBonif"], 2) . "</td>";
+            $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["impBonif"], 2) . "</td>";*/
+            $this->html .= "<td class='right-text' style='width=20%;'>" . number_format($item["variacion"], 2) . "</td>";
             $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["importeItem"], 2) . "</td>";
             $this->html .= "</tr>";
         }

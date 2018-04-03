@@ -3,7 +3,7 @@
     "description": "Libreria para los servicios SOAP de Afip.",
     "keywords": ["libreria", "enolaphp", "AFIP", "SOAP"],
     "license": "MIT",
-    "version": "1.1",
+    "version": "1.1.1",
     "support": {
         "issues": "https://github.com/edunola13/afip-soap/issues",
         "source": "https://github.com/edunola13/afip-soap"

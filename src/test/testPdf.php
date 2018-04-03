@@ -88,9 +88,10 @@ $pdf = new PdfVoucher(
                     'cantidad' => 3,
                     'unidadMedida' => 'unidad',
                     'precioUnitario' => 100,
-                    'Alic' => 21,
-                    'porcBonif' => 10,
-                    'impBonif' => 30,
+                    'Alic' => 10.5,
+                    /*'porcBonif' => 10,
+                    'impBonif' => 30,*/
+                    'variacion' => -30,
                     'importeItem' => 270
                 )
             )
@@ -106,6 +107,6 @@ $pdf = new PdfVoucher(
         )
     );
 
-$pdf->emitirPDF(dirname(__FILE__) . "/logo-vander.gif");
+$pdf->emitirPDF(dirname(__FILE__) . "/lemonshop.png");
 
 $pdf->Output("nombre_archivo.pdf");
