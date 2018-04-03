@@ -12,8 +12,8 @@ $data = array(
 	'Concepto' 		=> 1, // Concepto del Comprobante: (1)Productos, (2)Servicios, (3)Productos y Servicios
 	'DocTipo' 		=> 80, // Tipo de documento del comprador (ver tipos disponibles)
 	'DocNro' 		=> 20111111112, // Numero de documento del comprador
-	'CbteDesde' 	=> 2, // Numero de comprobante o numero del primer comprobante en caso de ser mas de uno
-	'CbteHasta' 	=> 2, // Numero de comprobante o numero del ultimo comprobante en caso de ser mas de uno
+	'CbteDesde' 	=> 4, // Numero de comprobante o numero del primer comprobante en caso de ser mas de uno
+	'CbteHasta' 	=> 4, // Numero de comprobante o numero del ultimo comprobante en caso de ser mas de uno
 	'CbteFch' 		=> intval(date('Ymd')), // (Opcional) Fecha del comprobante (yyyymmdd) o fecha actual si es nulo
 	'ImpTotal' 		=> 1297.91, // Importe total del comprobante
 	'ImpTotConc' 	=> 0, // Importe neto no gravado
@@ -72,4 +72,6 @@ $data = array(
 
 $afip = new Afip(array('CUIT' => 20356089511, 'folderCert' => dirname(__FILE__)));
 
-var_dump($afip->getWsfev1()->GetLastVoucher(1, null));
+//var_dump($afip->getWsfev1()->GetLastVoucher(1, 6));
+//var_dump($afip->getWsfev1()->CreateVoucher($data));
+var_dump($afip->getWsfev1()->GetVoucherInfo(4, 1, 6));

@@ -14,6 +14,8 @@ class PdfVoucher extends \Spipu\Html2Pdf\Html2Pdf{
     private $extraData = null;
     private $finished = false; //Determina si es la ultima pagina
     private $html = "";
+    
+    protected $parseIvaType= array(3 => 0, 4 => '10.5', 5 => '21', 6 => '27', 8 => '5', 9 => '2.5');
     private $lang = array();
     const LANG_EN = 2;
     
@@ -198,7 +200,7 @@ class PdfVoucher extends \Spipu\Html2Pdf\Html2Pdf{
             /*$this->html .= "<td class='right-text' style='width=8%;'>" . number_format($item["porcBonif"], 2) . "</td>";
             $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["impBonif"], 2) . "</td>";*/
             $this->html .= "<td class='right-text' style='width=18%;'>" . number_format($item["variacion"], 2) . "</td>";
-            $this->html .= "<td class='right-text' style='width=6%;'>" . number_format($item["Alic"], 2) . "%</td>";
+            $this->html .= "<td class='right-text' style='width=6%;'>" . (is_numeric($item["Alic"]) ? number_format($item["Alic"], 2) . '%' : '-') . "</td>";
             $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["importeItem"], 2) . "</td>";
             $this->html .= "</tr>";
         }
@@ -352,8 +354,9 @@ class PdfVoucher extends \Spipu\Html2Pdf\Html2Pdf{
         $str .= '            <td class="right-text" style="width=70px;">' . $importeGravado . '</td>';
         $str .= '        </tr>';
         foreach ($this->data["Iva"] as $iva) {
-            $value = $iva["Importe"];
-            $descripcion = "IVA $value%: " . $this->lang($this->data["MonId"]);
+            $id = $iva["Id"];
+            $detIva= $this->parseIvaType[$id];
+            $descripcion = "IVA $detIva%: " . $this->lang($this->data["MonId"]);
             $importe = number_format((float) round($iva["Importe"], 2), 2, '.', '');
             $str .= '        <tr>';
             $str .= '            <td class="right-text" style="width=200px;">' . $descripcion . '</td>';
