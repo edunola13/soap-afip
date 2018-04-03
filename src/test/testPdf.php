@@ -3,7 +3,7 @@ namespace Enola\Afip\Test;
 
 include dirname(__DIR__) . '../../vendor/autoload.php';
 
-use Enola\Afip\Afip;
+use Enola\Afip\Pdf\PdfVoucher;
 
 $data = array(
 	'CantReg' 		=> 1, // Cantidad de comprobantes a registrar
@@ -70,6 +70,42 @@ $data = array(
 //	)
 );
 
-$afip = new Afip(array('CUIT' => 20356089511, 'folderCert' => dirname(__FILE__)));
+$pdf = new PdfVoucher(
+        $data,
+        array(
+            'letra' => 'A',
+            'nombreCliente' => 'Pedro',
+            'docTipoDetalle' => 'DNI',
+            'tipoResponsable' => 'Res Ins',
+            'domicilioCliente' => '-',
+            'CondicionVenta' => '-',
+            'cae' => '12312323',
+            'fechaVencimientoCAE' => '2018-02-03',
+            'items' => array(
+                array(
+                    'codigo' => 'sde2324',
+                    'descripcion' => 'Este es un producto/servicio',
+                    'cantidad' => 3,
+                    'unidadMedida' => 'unidad',
+                    'precioUnitario' => 100,
+                    'Alic' => 21,
+                    'porcBonif' => 10,
+                    'impBonif' => 30,
+                    'importeItem' => 270
+                )
+            )
+        ), 
+        array(
+            'TRADE_SOCIAL_REASON' => 'Test',
+            'TRADE_CUIT' => 20356089511,
+            'TRADE_ADDRESS' => 'Calle 10',
+            'TRADE_TAX_CONDITION' => 'Mon C',
+            'TRADE_INIT_ACTIVITY' => '10/02/2015',
+            'VOUCHER_OBSERVATION' => '',
+            'TYPE_CODE' => 'codigo'
+        )
+    );
 
-var_dump($afip->getWsfev1()->GetLastVoucher(1, null));
+$pdf->emitirPDF(dirname(__FILE__) . "/logo-vander.gif");
+
+$pdf->Output("nombre_archivo.pdf");

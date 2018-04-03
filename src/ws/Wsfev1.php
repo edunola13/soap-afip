@@ -3,6 +3,7 @@ namespace Enola\Afip\ws;
 use Enola\Afip\AfipWebService;
 use DateTime;
 use Exception;
+use StdClass;
 
 /**
  * WS basico de facturacion electronica
