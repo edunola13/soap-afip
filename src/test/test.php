@@ -73,5 +73,5 @@ $data = array(
 $afip = new Afip(array('CUIT' => 20356089511, 'folderCert' => dirname(__FILE__)));
 
 //var_dump($afip->getWsfev1()->GetLastVoucher(1, 6));
-//var_dump($afip->getWsfev1()->CreateVoucher($data));
-var_dump($afip->getWsfev1()->GetVoucherInfo(4, 1, 6));
+var_dump($afip->getWsfev1()->CreateVoucher($data));
+//var_dump($afip->getWsfev1()->GetVoucherInfo(4, 1, 6));
