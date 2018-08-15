@@ -67,11 +67,11 @@ class PdfVoucher extends \Spipu\Html2Pdf\Html2Pdf{
                 $this->html .= "</div>";
                 $this->html .= "<div class='border-div'>";
             }
-            $type = $this->lang("Factura");
+            $type = $this->lang("FACTURA");
             $letter = $this->extraData["letra"]; //DEBE SER A, B o C
-            $number = $this->lang("Punto de venta") . ": " . str_pad($this->data["PtoVta"], 4, "0", STR_PAD_LEFT) . "   " . $this->lang("Comp. Nro") . ": " . str_pad($this->data["CbteDesde"], 8, "0", STR_PAD_LEFT);
+            $number = "<span style='font-weight: bold'>" . $this->lang("Punto de venta") . ":</span> " . str_pad($this->data["PtoVta"], 4, "0", STR_PAD_LEFT) . " <span style='font-weight: bold'>  " . $this->lang("Comp. Nro") . ":</span> " . str_pad($this->data["CbteDesde"], 8, "0", STR_PAD_LEFT);
             $tmp = DateTime::createFromFormat('Ymd',$this->data["CbteFch"]);
-            $date = $this->lang("Fecha de emisi&oacute;n") . ": " . date_format($tmp, $this->lang('d/m/Y'));
+            $date = "<span style='font-weight: bold'>" . $this->lang("Fecha de emisi&oacute;n") . ":</span> " . date_format($tmp, $this->lang('d/m/Y'));
             $this->html .= "    <div class='letter'>";
             $this->html .= "        <p class='title'>$letter</p> ";
             $id_type = $this->data["CbteTipo"];
@@ -81,11 +81,11 @@ class PdfVoucher extends \Spipu\Html2Pdf\Html2Pdf{
             $this->html .= "<tr><td style='width: 3%;'></td>";
             $this->html .= "<td style='width: 27%;'>";
             if (file_exists($logo_path)) {
-                $this->html .= "<img class='logo' src='" . $logo_path . "' alt='logo'>";
+                $this->html .= "<img class='logo' style='width: 100%' src='" . $logo_path . "' alt='logo'>";
             }
             $this->html .= "</td>";
             $this->html .= "<td class='right-text' style='width: 69%;'>";
-            $this->html .= "    <span class='type_voucher header_margin'>$type</span><br>";
+            $this->html .= "    <span class='type_voucher header_margin' style='margin-bottom: 10px; font-size:30px'>$type</span><br>";
             $this->html .= "    <span class='header_margin'>$number</span><br>";
             $this->html .= "    <span class='header_margin'>$date</span>";
             if ($this->data["Concepto"] == 2 || $this->data["Concepto"] == 3) {
@@ -105,17 +105,17 @@ class PdfVoucher extends \Spipu\Html2Pdf\Html2Pdf{
             $this->html .= "</table>";
             $this->html .= "<table class='responsive-table table-header'>";
             $this->html .= "<tr>";
-            $this->html .= "<td style='width:50%;'>" . $this->lang("Raz&oacute;n social") . ": " . strtoupper($this->config["TRADE_SOCIAL_REASON"]) . "</td>";
-            $this->html .= "<td class='right-text' style='width:49%;'>" . $this->lang("CUIT") . ": " . $this->config["TRADE_CUIT"] . "</td>";
+            $this->html .= "<td style='width:50%;'><span style='font-weight:bold'>" . $this->lang("Raz&oacute;n social") . ":</span> " . strtoupper($this->config["TRADE_SOCIAL_REASON"]) . "</td>";
+            $this->html .= "<td class='right-text' style='width:49%;'> <span style='font-weight:bold'>" . $this->lang("CUIT") . ":</span>  " . $this->config["TRADE_CUIT"] . "</td>";
             $this->html .= "</tr>";
             $this->html .= "<tr>";
-            $this->html .= "<td style='width:50%;'>" . $this->lang("Domicilio comercial") . ": " . strtoupper($this->config["TRADE_ADDRESS"]) . "</td>";
-            $this->html .= "<td class='right-text' style='width:49%;'>" . $this->lang("Ingresos Brutos") . ": " . $this->config["TRADE_CUIT"] . "</td>";
+            $this->html .= "<td style='width:50%;'><span style='font-weight:bold'>" . $this->lang("Domicilio comercial") . ":</span> " . strtoupper($this->config["TRADE_ADDRESS"]) . "</td>";
+            $this->html .= "<td class='right-text' style='width:49%;'><span style='font-weight:bold'>" . $this->lang("Ingresos Brutos") . ":</span>  " . $this->config["TRADE_CUIT"] . "</td>";
             $this->html .= "</tr>";
             $this->html .= "<tr>";
-            $this->html .= "<td style='width:50%;'>" . $this->lang("Condici&oacute;n frente al IVA") . ": " . strtoupper($this->config["TRADE_TAX_CONDITION"]) . "</td>";
+            $this->html .= "<td style='width:50%;'><span style='font-weight:bold'>" . $this->lang("Condici&oacute;n frente al IVA") . ":</span>  " . strtoupper($this->config["TRADE_TAX_CONDITION"]) . "</td>";
             $tmp = DateTime::createFromFormat('d/m/Y',$this->config["TRADE_INIT_ACTIVITY"]);
-            $this->html .= "<td class='right-text' style='width:49%;'>" . $this->lang("Fecha de inicio de actividades") . ": " . date_format($tmp, $this->lang('d/m/Y')) . "</td>";
+            $this->html .= "<td class='right-text' style='width:49%;'> <span style='font-weight:bold'>" . $this->lang("Fecha de inicio de actividades") . ":</span> " . date_format($tmp, $this->lang('d/m/Y')) . "</td>";
             $this->html .= "</tr>";
             $this->html .= "</table>";
             $this->html .= "</div>";
@@ -132,19 +132,19 @@ class PdfVoucher extends \Spipu\Html2Pdf\Html2Pdf{
             $this->html .= "<div class='border-div'>";
             $this->html .= "<table class='responsive-table table-header'>";
             $this->html .= "<tr>";
-            $text = $this->lang($this->extraData["docTipoDetalle"]) . ": " . $this->data["DocNro"];
+            $text = "<span style='font-weight:bold'>" . $this->lang($this->extraData["docTipoDetalle"]) . ":</span> " . $this->data["DocNro"];
             $this->html .= "<td style='width:50%;'>" . $text . "</td>";
-            $text = $this->lang("Apellido y Nombre / Raz&oacute;n Social") . ": " . strtoupper($this->extraData["nombreCliente"]);
+            $text = "<span style='font-weight:bold'>" . $this->lang("Apellido y Nombre / Raz&oacute;n Social") . ":</span> " . strtoupper($this->extraData["nombreCliente"]);
             $this->html .= "<td class='right-text' style='width:49%;'>" . $text . "</td>";
             $this->html .= "</tr>";
             $this->html .= "<tr>";
-            $text = $this->lang("Condici&oacute;n frente al IVA") . ": " . $this->lang($this->extraData["tipoResponsable"]);
+            $text = "<span style='font-weight:bold'>" .$this->lang("Condici&oacute;n frente al IVA") . ":</span> " . $this->lang($this->extraData["tipoResponsable"]);
             $this->html .= "<td style='width:50%;'>" . $text . "</td>";
-            $text = $this->lang("Domicilio") . ": " . $this->extraData["domicilioCliente"];
+            $text = "<span style='font-weight:bold'>". $this->lang("Domicilio") . ":</span> " . $this->extraData["domicilioCliente"];
             $this->html .= "<td class='right-text' style='width:49%;'>" . $text . "</td>";
             $this->html .= "</tr>";
             $this->html .= "<tr>";
-            $text = $this->lang("Condici&oacute;nes de venta") . ": " . $this->lang($this->extraData["CondicionVenta"]);
+            $text = "<span style='font-weight:bold'>". $this->lang("Condici&oacute;nes de venta") . ": </span>" . $this->lang($this->extraData["CondicionVenta"]);
             $this->html .= "<td style='width:10%;'>" . $text . "</td>";
             $this->html .= "</tr>";
             $this->html .= "</table>";
@@ -175,8 +175,8 @@ class PdfVoucher extends \Spipu\Html2Pdf\Html2Pdf{
      */
     function fill_A() {
         $this->html .= "<tr>";
-        $this->html .= "<th class='center-text' style='width=10%;'>" . $this->lang("C&oacute;digo") . "</th>";
-        $this->html .= "<th style='width=26%;'>" . $this->lang("Producto / Servicio") . "</th>";
+        $this->html .= "<th class='center-text' style='width=13%;'>" . $this->lang("C&oacute;digo") . "</th>";
+        $this->html .= "<th style='width=23%;'>" . $this->lang("Producto / Servicio") . "</th>";
         $this->html .= "<th class='right-text' style='width=10%;'>" . $this->lang("Cantidad") . "</th>";
         $this->html .= "<th style='width=10%;'>" . $this->lang("U. Medida") . "</th>";
         $this->html .= "<th class='right-text' style='width=10%;'>" . $this->lang("Precio unit.") . "</th>";
@@ -189,11 +189,11 @@ class PdfVoucher extends \Spipu\Html2Pdf\Html2Pdf{
         foreach ($this->extraData["items"] as $item) {
             $this->html .= "<tr>";
             if (isset($this->config["TYPE_CODE"]) && $this->config["TYPE_CODE"] == 'scanner') {
-                $this->html .= "<td class='center-text' style='width=10%;'>" . $item["scanner"] . "</td>";
+                $this->html .= "<td class='center-text' style='width=13%;'>" . $item["scanner"] . "</td>";
             } else {
-                $this->html .= "<td class='center-text' style='width=10%;'>" . $item["codigo"] . "</td>";
+                $this->html .= "<td class='center-text' style='width=13%;'>" . $item["codigo"] . "</td>";
             }
-            $this->html .= "<td style='width=26%;'>" . $item["descripcion"] . "</td>";
+            $this->html .= "<td style='width=23%;'>" . $item["descripcion"] . "</td>";
             $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["cantidad"], 3) . "</td>";
             $this->html .= "<td style='width=10%;'>" . $item["unidadMedida"] . "</td>";
             $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["precioUnitario"], 2) . "</td>";
@@ -213,8 +213,8 @@ class PdfVoucher extends \Spipu\Html2Pdf\Html2Pdf{
      */
     function fill_B() {
         $this->html .= "<tr>";
-        $this->html .= "<th class='center-text' style='width=10%;'>" . $this->lang("C&oacute;digo") . "</th>";
-        $this->html .= "<th style='width=30%;'>" . $this->lang("Producto / Servicio") . "</th>";
+        $this->html .= "<th class='center-text' style='width=13%;'>" . $this->lang("C&oacute;digo") . "</th>";
+        $this->html .= "<th style='width=27%;'>" . $this->lang("Producto / Servicio") . "</th>";
         $this->html .= "<th class='right-text' style='width=10%;'>" . $this->lang("Cantidad") . "</th>";
         $this->html .= "<th style='width=10%;'>" . $this->lang("U. Medida") . "</th>";
         $this->html .= "<th class='right-text' style='width=10%;'>" . $this->lang("Precio unit.") . "</th>";
@@ -226,11 +226,11 @@ class PdfVoucher extends \Spipu\Html2Pdf\Html2Pdf{
         foreach ($this->extraData["items"] as $item) {
             $this->html .= "<tr>";
             if (isset($this->config["TYPE_CODE"]) && $this->config["TYPE_CODE"] == 'scanner') {
-                $this->html .= "<td class='center-text' style='width=10%;'>" . $item["scanner"] . "</td>";
+                $this->html .= "<td class='center-text' style='width=13%;'>" . $item["scanner"] . "</td>";
             } else {
-                $this->html .= "<td class='center-text' style='width=10%;'>" . $item["codigo"] . "</td>";
+                $this->html .= "<td class='center-text' style='width=13%;'>" . $item["codigo"] . "</td>";
             }
-            $this->html .= "<td style='width=30%;'>" . $item["descripcion"] . "</td>";
+            $this->html .= "<td style='width=27%;'>" . $item["descripcion"] . "</td>";
             $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["cantidad"], 3) . "</td>";
             $this->html .= "<td style='width=10%;'>" . $this->lang($item["unidadMedida"]) . "</td>";
             $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["precioUnitario"], 2) . "</td>";
@@ -285,17 +285,17 @@ class PdfVoucher extends \Spipu\Html2Pdf\Html2Pdf{
     private function total_line_B() {
         $this->html .= '    <table class="responsive-table">';
         $this->html .= '        <tr>';
-        $this->html .= '		<td class="right-text" style="width: 75%;">' . $this->lang("Subtotal") . ': '. $this->lang($this->data["MonId"]) .'</td>';
+        $this->html .= '		<td class="right-text" style="width: 75%; font-weight:bold">' . $this->lang("Subtotal") . ': '. $this->lang($this->data["MonId"]) .'</td>';
         $text = number_format((float) round($this->data["ImpTotal"], 2), 2, '.', '');
         $this->html .= '		<td class="right-text" style="width: 25%;">' . $text . '</td>';
         $this->html .= '        </tr>';
         $this->html .= '        <tr>';
-        $this->html .= '		<td class="right-text" style="width: 75%;">' . $this->lang("Importe otros tributos") . ': '. $this->lang($this->data["MonId"]) .'</td>';
+        $this->html .= '		<td class="right-text" style="width: 75%; font-weight:bold">' . $this->lang("Importe otros tributos") . ': '. $this->lang($this->data["MonId"]) .'</td>';
         $text = number_format((float) round($this->data["ImpTrib"], 2), 2, '.', '');
         $this->html .= '		<td class="right-text" style="width: 25%;">' . $text . '</td>';
         $this->html .= '        </tr>';
         $this->html .= '        <tr>';
-        $this->html .= '		<td class="right-text" style="width: 75%;">' . $this->lang("Importe total") . ': '. $this->lang($this->data["MonId"]) .'</td>';
+        $this->html .= '		<td class="right-text" style="width: 75%;font-weight:bold">' . $this->lang("Importe total") . ': '. $this->lang($this->data["MonId"]) .'</td>';
         $text = number_format((float) round($this->data["ImpTotal"], 2), 2, '.', '');
         $this->html .= '		<td class="right-text" style="width: 25%;">' . $text . '</td>';
         $this->html .= '        </tr>';
